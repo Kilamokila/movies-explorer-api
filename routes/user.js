@@ -5,7 +5,7 @@ const { getUserInfo, updateUserInfo } = require('../controllers/user');
 
 const userRouter = express.Router();
 
-userRouter.get('/me', getUserInfo);
-userRouter.patch('/me', express.json(), celebrate(joiUserInfoScheme), updateUserInfo);
+userRouter.get('/users/me', getUserInfo);
+userRouter.patch('/users/me', express.json(), celebrate(joiUserInfoScheme), updateUserInfo);
 
 module.exports = { userRouter };

@@ -28,6 +28,6 @@ exports.getUserInfo = (req, res, next) => {
     next(new AuthError('Ошибка авторизации'));
   }
   return User.findById(currentUserId)
-    .then((user) => res.status(200).send(user.email, user.name))
+    .then((user) => res.status(200).send({ email: user.email, name: user.name }))
     .catch(next);
 };

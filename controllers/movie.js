@@ -24,7 +24,6 @@ exports.getMovies = (req, res, next) => {
     .catch(next);
 };
 
-// eslint-disable-next-line consistent-return
 exports.deleteMovie = async (req, res, next) => {
   try {
     const { movieId } = req.params;
@@ -35,7 +34,7 @@ exports.deleteMovie = async (req, res, next) => {
     if (!movie.owner.equals(req.user._id)) {
       return next(new ForbiddenError('Ошибка доступа.'));
     }
-    const removedMovie = await Movie.findByIdAndRemove(movieId);
+    const removedMovie = await Movie.remove(movie);
     if (!removedMovie) {
       return next(new NotFoundError('Передан неверный айди фильма, поэтому не получилось удалить.'));
     }
@@ -47,4 +46,5 @@ exports.deleteMovie = async (req, res, next) => {
       next(err);
     }
   }
+  return res.status;
 };

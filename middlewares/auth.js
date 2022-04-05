@@ -5,9 +5,9 @@ const { JWT_SECRET = 'dev-secret' } = process.env;
 
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
-  const token = authorization.replace('Bearer ', '');
   let payload;
   try {
+    const token = authorization.replace('Bearer ', '');
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
     next(new AuthError('Необходима авторизация'));

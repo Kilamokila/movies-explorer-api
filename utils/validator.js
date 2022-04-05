@@ -9,14 +9,14 @@ exports.joiMovieScheme = {
     director: Joi.string().required().min(2).max(30),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.string().required().min(10).max(150),
+    description: Joi.string().required(),
     image: Joi.string().required().custom((value) => {
       if (validator.isURL(value, { require_protocol: true })) {
         return value;
       }
       throw new BadRequestError('Формат ссылки некорректен');
     }),
-    trailer: Joi.string().required().custom((value) => {
+    trailerLink: Joi.string().required().custom((value) => {
       if (validator.isURL(value, { require_protocol: true })) {
         return value;
       }
@@ -30,7 +30,7 @@ exports.joiMovieScheme = {
       }
       throw new BadRequestError('Формат ссылки некорректен');
     }),
-    movieId: Joi.string().required().custom((value, helpers) => {
+    movieId: Joi.number().required().custom((value, helpers) => {
       if (ObjectId.isValid(value)) {
         return value;
       }
