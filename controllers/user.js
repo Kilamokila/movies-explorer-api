@@ -1,7 +1,7 @@
 const User = require('../models/user');
-
 const BadRequestError = require('../errors/BadRequestError');
 const AuthError = require('../errors/AuthError');
+const DuplicateKeyError = require('../errors/DuplicateKeyError');
 
 exports.updateUserInfo = (req, res, next) => {
   const userId = req.user._id;
@@ -16,6 +16,8 @@ exports.updateUserInfo = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Некорректные данные'));
+      } else if (err.code === 11000) {
+        next(new DuplicateKeyError('Такой Email уже был использован при регистрации'));
       } else {
         next(err);
       }

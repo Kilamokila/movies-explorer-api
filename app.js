@@ -30,8 +30,8 @@ app.get('/crash-test', () => {
 });
 
 app.use(authenticationRouter);
-app.use(userRouter, auth);
-app.use(movieRouter, auth);
+app.use(auth, userRouter);
+app.use(auth, movieRouter);
 app.use('/', auth);
 
 app.use(errorLogger);
