@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    validae: {
+    validate: {
       validator(v) {
         return validator.isEmail(v);
       },

@@ -18,9 +18,9 @@ exports.addMovie = (req, res, next) => {
 };
 
 exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id }).populate(['owner'])
     .then(res.status(200))
-    .then((cards) => res.send(cards))
+    .then((movies) => res.send(movies))
     .catch(next);
 };
 

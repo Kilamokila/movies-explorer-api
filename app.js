@@ -33,9 +33,7 @@ app.use(authenticationRouter);
 app.use(auth, userRouter);
 app.use(auth, movieRouter);
 app.use('/', auth);
-
 app.use(errorLogger);
-
 app.use(errors());
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Такой страницы не существует'));
