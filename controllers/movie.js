@@ -19,13 +19,13 @@ exports.addMovie = (req, res, next) => {
 
 const getMovies = async (req, res, next) => {
   try {
-    const savedMovies = await Movie.find({ owner: req.user._id }).populate(['owner']);
+    const savedMovies = await Movie.find({ owner: req.user._id }).populate('owner');
     if (!savedMovies) {
-      throw new NotFoundError('Фильмов не нашлось :(');
+      throw new NotFoundError('Сохраненных фильмов нет');
     }
     res.send(savedMovies);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
