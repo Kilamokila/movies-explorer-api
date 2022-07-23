@@ -17,11 +17,16 @@ exports.addMovie = (req, res, next) => {
     });
 };
 
-exports.getMovies = (req, res, next) => {
-  Movie.find({ owner: req.user._id }).populate(['owner'])
-    .then(res.status(200))
-    .then((movies) => res.send(movies))
-    .catch(next);
+const getMovies = async (req, res, next) => {
+  try {
+    const savedMovies = await Movie.find({ owner: req.user._id }).populate(['owner']);
+    if (!savedMovies) {
+      throw new NotFoundError('Фильмов не нашлось :(');
+    }
+    res.send(savedMovies);
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.deleteMovie = async (req, res, next) => {
@@ -48,3 +53,5 @@ exports.deleteMovie = async (req, res, next) => {
   }
   return res.status;
 };
+
+module.exports = { getMovies };
