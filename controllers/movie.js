@@ -4,7 +4,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
 const BadRequestError = require('../errors/BadRequestError');
 
-exports.addMovie = (req, res, next) => {
+const addMovie = (req, res, next) => {
   Movie.create({ ...req.body, owner: req.user._id })
     .then(res.status(201))
     .then((movie) => res.send(movie))
@@ -29,7 +29,7 @@ const getMovies = async (req, res, next) => {
   }
 };
 
-exports.deleteMovie = async (req, res, next) => {
+const deleteMovie = async (req, res, next) => {
   try {
     const { movieId } = req.params;
     const movie = await Movie.findById(movieId);
@@ -54,4 +54,4 @@ exports.deleteMovie = async (req, res, next) => {
   return res.status;
 };
 
-module.exports = { getMovies };
+module.exports = { getMovies, addMovie, deleteMovie };
