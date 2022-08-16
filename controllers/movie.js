@@ -19,7 +19,7 @@ const addMovie = (req, res, next) => {
 
 const getMovies = async (req, res, next) => {
   try {
-    const savedMovies = await Movie.find({ owner: req.user._id }).populate('owner');
+    const savedMovies = await Movie.find({ owner: req.user._id });
     if (!savedMovies) {
       throw new NotFoundError('Сохраненных фильмов нет');
     }
