@@ -9,4 +9,4 @@
 *JavaScript;
 
 ## Ссылки проекта:
-https://api.dan2491.nomoredomains.work (бэкэнд)
+https://api.dan2491.nomoredomains.xyz (бэкэнд)
